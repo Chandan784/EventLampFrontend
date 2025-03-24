@@ -45,7 +45,7 @@ const VenueManagement = () => {
   // Fetch all venues from the backend
   const fetchVenues = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/venues");
+      const response = await fetch("https://api.eventlamp.com/api/venues");
       if (!response.ok) throw new Error("Failed to fetch venues");
       const data = await response.json();
       setVenues(data);
@@ -71,7 +71,7 @@ const VenueManagement = () => {
 
     try {
       // Send files to the backend
-      const response = await fetch("http://localhost:5000/api/v1/upload", {
+      const response = await fetch("https://api.eventlamp.com/api/v1/upload", {
         method: "POST",
         body: formData,
       });
@@ -131,7 +131,7 @@ const VenueManagement = () => {
       if (isEditing) {
         // Update existing venue
         response = await fetch(
-          `http://localhost:5000/api/venues/${editVenueId}`,
+          `https://api.eventlamp.com/api/venues/${editVenueId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -140,7 +140,7 @@ const VenueManagement = () => {
         );
       } else {
         // Create new venue
-        response = await fetch("http://localhost:5000/api/venues", {
+        response = await fetch("https://api.eventlamp.com/api/venues", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newVenue),
@@ -172,7 +172,7 @@ const VenueManagement = () => {
   const handleDelete = async (venueId) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/venues/${venueId}`,
+        `https://api.eventlamp.com/api/venues/${venueId}`,
         {
           method: "DELETE",
         }

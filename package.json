@@ -2,6 +2,7 @@
   "name": "party-booking-app",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://api.eventlamp.com",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",

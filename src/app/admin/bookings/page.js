@@ -34,7 +34,7 @@ export default function BookingManagement() {
   const handleStatusChange = async (_id, newStatus) => {
     try {
       const res = await axios.patch(
-        `http://localhost:5000/api/bookings/${_id}/status`,
+        `https://api.eventlamp.com/api/bookings/${_id}/status`,
         {
           status: newStatus,
         }

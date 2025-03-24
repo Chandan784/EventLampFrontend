@@ -27,7 +27,7 @@ export default function VenueDetails({ params }) {
     const fetchVenue = async () => {
       try {
         // Fetch venue details using the dynamic `id`
-        const res = await fetch(`http://localhost:5000/api/venues/${id}`);
+        const res = await fetch(`https://api.eventlamp.com/api/venues/${id}`);
         if (!res.ok) {
           throw new Error(`Failed to fetch venue: ${res.statusText}`);
         }
@@ -38,7 +38,7 @@ export default function VenueDetails({ params }) {
 
         // Fetch more suggestions based on category
         const suggestionsRes = await fetch(
-          `http://localhost:5000/api/venues?category=${data.category}`
+          `https://api.eventlamp.com/api/venues?category=${data.category}`
         );
         if (!suggestionsRes.ok) {
           throw new Error(
@@ -77,7 +77,7 @@ export default function VenueDetails({ params }) {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/api/bookings/", {
+      const response = await fetch("https://api.eventlamp.com/api/bookings/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
