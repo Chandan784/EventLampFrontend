@@ -30,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchVenues() {
       try {
-        const response = await fetch("/api/venues");
+        const response = await fetch("https://api.eventlamp.com/api/venues");
         const data = await response.json();
         setVenues(data);
       } catch (error) {
