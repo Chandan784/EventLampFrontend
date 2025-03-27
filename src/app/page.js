@@ -136,6 +136,7 @@ export default function Home() {
               <option value="Wedding Planner">Wedding Planner</option>
               <option value="Event Manager">Event Manager</option>
               <option value="Caterer">Caterer</option>
+              <option value="Stage Programer">Stage Programer</option>
               <option value="MNC" className="font-bold text-blue-600">
                 MNC (Big Companies)
               </option>

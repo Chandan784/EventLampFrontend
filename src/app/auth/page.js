@@ -131,7 +131,7 @@ export default function Authentcation() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Left Side (Form / Message) */}
-      <div className="flex flex-col justify-center w-full md:w-3/5 p-12">
+      <div className="flex flex-col justify-center w-full  p-4">
         <motion.div
           className="w-full max-w-md mx-auto bg-white shadow-lg rounded-2xl p-8 relative"
           initial={{ opacity: 0, x: -50 }}
