@@ -14,28 +14,26 @@ jobs:
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: |
-            ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: |
-            ${{ secrets.KNOWN_HOSTS }}
-          config: |
-            Host ${{ secrets.SSH_HOST }}
-              HostName ${{ secrets.SSH_HOST }}
-              User ${{ secrets.SSH_USER }}
-              IdentityFile ~/.ssh/id_rsa
-              StrictHostKeyChecking no
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
-      - name: Deploy to VPS
+      - name: Deploy
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            # Navigate to project directory
-            cd /root/EventLampFrontend
+            # Create directory if missing
+            mkdir -p /root/EventLampFrontend
             
-            # Pull latest changes
-            git reset --hard
-            git pull origin main
+            # Initialize Git repo if needed
+            if [ ! -d /root/EventLampFrontend/.git ]; then
+              git clone https://github.com/yourusername/your-repo.git /root/EventLampFrontend
+              cd /root/EventLampFrontend
+            else
+              cd /root/EventLampFrontend
+              git reset --hard
+              git pull origin main
+            fi
             
-            # Rebuild and restart containers
+            # Docker deployment
             docker-compose down
             docker-compose build --no-cache
             docker-compose up -d
