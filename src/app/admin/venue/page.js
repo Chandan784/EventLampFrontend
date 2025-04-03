@@ -71,7 +71,7 @@ const VenueManagement = () => {
 
     try {
       // Send files to the backend
-      const response = await fetch("https://api.eventlamp.com/api/v1/upload", {
+      const response = await fetch("http://localhost/api/v1/upload", {
         method: "POST",
         body: formData,
       });
