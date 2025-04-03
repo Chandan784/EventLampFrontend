@@ -5,19 +5,33 @@ on: [push]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
+      # Fixed SSH key installation with explicit known_hosts
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          key: |
+            ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: |
+            ${{ secrets.KNOWN_HOSTS }}
+          config: |
+            Host ${{ secrets.SSH_HOST }}
+              HostName ${{ secrets.SSH_HOST }}
+              User ${{ secrets.SSH_USER }}
+              StrictHostKeyChecking no
 
+      # Test connection before deploy
+      - name: Test SSH
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Connected!'"
+
+      # Main deployment
       - name: Deploy
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            cd /root/your-repo
+            cd /path/to/your-repo
             git pull
             docker-compose down
             docker-compose up -d --build
