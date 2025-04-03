@@ -17,11 +17,21 @@ jobs:
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          # Add these for better debugging:
+          config: |
+            Host ${{ secrets.SSH_HOST }}
+              HostName ${{ secrets.SSH_HOST }}
+              User ${{ secrets.SSH_USER }}
+              IdentityFile ~/.ssh/id_rsa
+              StrictHostKeyChecking no
+
+      - name: Test SSH Connection
+        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful!'"
 
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
-          cd /path/to/your/project
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+          cd /path/to/your-repo
           git pull origin main
           docker-compose down
           docker-compose build --no-cache
