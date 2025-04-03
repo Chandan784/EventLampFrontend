@@ -1,10 +1,8 @@
 version: '3.8'
 
 services:
-  app:
+  nextjs-app:
     build: .
     ports:
-      - "4000:3000"
-    environment:
-      - NODE_ENV=production
-    restart: unless-stopped
+      - "4000:4000"
+    restart: always

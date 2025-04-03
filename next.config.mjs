@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  serverRuntimeConfig: {
+    port: process.env.PORT || 4000,
+  },
+};
 
 export default nextConfig;

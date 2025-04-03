@@ -1,40 +1,42 @@
-name: Deploy to VPS
+name: Deploy Next.js App
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main # Trigger deployment on push to the main branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-
-      - name: Deploy
+      - name: Build and push Docker image
         run: |
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            # Create directory if missing
-            mkdir -p /root/EventLampFrontend
-            
-            # Initialize Git repo if needed
-            if [ ! -d /root/EventLampFrontend/.git ]; then
-              git clone https://github.com/yourusername/your-repo.git /root/EventLampFrontend
-              cd /root/EventLampFrontend
-            else
-              cd /root/EventLampFrontend
-              git reset --hard
-              git pull origin main
-            fi
-            
-            # Docker deployment
-            docker-compose down
-            docker-compose build --no-cache
-            docker-compose up -d
-          "
+          docker build -t my-nextjs-app .
+          docker save my-nextjs-app | gzip > my-nextjs-app.tar.gz
+
+      - name: Copy Docker image to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          source: "my-nextjs-app.tar.gz"
+          target: "~/"
+
+      - name: SSH into VPS and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: 22
+          script: |
+            docker load < ~/my-nextjs-app.tar.gz
+            docker stop nextjs-container || true
+            docker rm nextjs-container || true
+            docker run -d -p 4000:4000 --name nextjs-container my-nextjs-app
