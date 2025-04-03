@@ -1,6 +1,8 @@
 name: Deploy to VPS
 
-on: [push]
+on:
+  push:
+    branches: [main]
 
 jobs:
   deploy:
@@ -9,7 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # Fixed SSH key installation with explicit known_hosts
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
@@ -21,18 +22,21 @@ jobs:
             Host ${{ secrets.SSH_HOST }}
               HostName ${{ secrets.SSH_HOST }}
               User ${{ secrets.SSH_USER }}
+              IdentityFile ~/.ssh/id_rsa
               StrictHostKeyChecking no
 
-      # Test connection before deploy
-      - name: Test SSH
-        run: ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'Connected!'"
-
-      # Main deployment
-      - name: Deploy
+      - name: Deploy to VPS
         run: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "
-            cd /path/to/your-repo
-            git pull
+            # Navigate to project directory
+            cd /root/EventLampFrontend
+            
+            # Pull latest changes
+            git reset --hard
+            git pull origin main
+            
+            # Rebuild and restart containers
             docker-compose down
-            docker-compose up -d --build
+            docker-compose build --no-cache
+            docker-compose up -d
           "
