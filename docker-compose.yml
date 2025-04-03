@@ -1,8 +1,7 @@
 version: '3.8'
-
 services:
-  nextjs-app:
+  eventlamp:
     build: .
     ports:
-      - "4000:4000"
+      - "4000:4000"  # Host:Container (both 4000)
     restart: always
