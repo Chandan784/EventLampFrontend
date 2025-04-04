@@ -23,7 +23,7 @@ export default function Verify() {
   const verifyEmail = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/v1/auth/activate/${token}`,
+        `${BACKEND_API_URL}/auth/activate/${token}`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },

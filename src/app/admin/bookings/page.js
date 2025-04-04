@@ -14,7 +14,7 @@ export default function BookingManagement() {
     const fetchBookings = async () => {
       try {
         // Fetch all bookings with optional filters
-        const res = await axios.get("http://localhost:5000/api/bookings", {
+        const res = await axios.get(`${BACKEND_API_URL}/bookings`, {
           params: {
             venueId: filterVenueId, // Filter by venue ID
           },

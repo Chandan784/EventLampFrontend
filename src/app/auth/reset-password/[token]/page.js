@@ -38,8 +38,14 @@ export default function ResetPassword({ params }) {
 
     try {
       // Reset Password API Call
+      //const { data } = await axios.post(
+        //`http://localhost:5000/api/v1/auth/reset-password/${token}`,
+       // { newPassword }
+     // );
+
+      // Reset Password API Call
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/auth/reset-password/${token}`,
+        `${BACKEND_API_URL}/auth/reset-password/${token}`,
         { newPassword }
       );
 
