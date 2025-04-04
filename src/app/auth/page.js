@@ -28,6 +28,9 @@ export default function Authentcation() {
     setMessage("");
     setLoading(true);
 
+    //biswa edit .env url
+    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     // Validation for required fields
     if (!email || !password || (!isLogin && (!fullName || !phoneNumber))) {
       setError("All fields are required.");
@@ -39,7 +42,7 @@ export default function Authentcation() {
       if (isLogin) {
         // Login API Call
         const { data } = await axios.post(
-          "http://localhost:5000/api/v1/auth/login",
+          `${BACKEND_API_URL}/auth/login`,
           { email, password }
         );
 
@@ -58,7 +61,7 @@ export default function Authentcation() {
       } else {
         // Signup API Call (updated to include phoneNumber)
         const { data } = await axios.post(
-          "http://localhost:5000/api/v1/auth/register",
+          `${BACKEND_API_URL}/auth/register`,
           { name: fullName, email, password, phoneNumber } // Include phoneNumber
         );
 
@@ -86,7 +89,7 @@ export default function Authentcation() {
     try {
       // Forgot Password API Call
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/auth/forgot-password",
+        `${BACKEND_API_URL}/auth/forgot-password`,
         { email }
       );
 
@@ -114,7 +117,7 @@ export default function Authentcation() {
     try {
       // Reset Password API Call
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/auth/reset-password/${resetToken}`,
+        `${BACKEND_API_URL}/auth/reset-password/${resetToken}`,
         { newPassword }
       );
 
@@ -131,7 +134,7 @@ export default function Authentcation() {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Left Side (Form / Message) */}
-      <div className="flex flex-col justify-center w-full md:w-3/5 p-12">
+      <div className="flex flex-col justify-center w-full  p-4">
         <motion.div
           className="w-full max-w-md mx-auto bg-white shadow-lg rounded-2xl p-8 relative"
           initial={{ opacity: 0, x: -50 }}
