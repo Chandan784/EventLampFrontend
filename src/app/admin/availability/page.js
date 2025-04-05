@@ -108,7 +108,7 @@ const Availability = () => {
       });
 
       // Send data to the backend
-      const response = await fetch(`${API_BACKEND_URL}/set`, {
+      const response = await fetch(`${API_BACKEND_URL}/api/availability/set`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

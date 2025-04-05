@@ -33,6 +33,7 @@ function page() {
             <th className="border px-4 py-2">Venue Name</th>
             <th className="border px-4 py-2">Venue Category</th>
             <th className="border px-4 py-2">Venue Image</th>
+            <th className="border px-4 py-2">Venue Image</th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +44,8 @@ function page() {
               <td className="border px-4 py-2">{booking.dates}</td>
               <td className="border px-4 py-2">{booking.venueId?._id}</td>
               <td className="border px-4 py-2">{booking.venueId?.name}</td>
+              <td className="border px-4 py-2">{booking.venueId?.category}</td>
+              <td className="border px-4 py-2">{booking.venueId?.category}</td>
               <td className="border px-4 py-2">{booking.venueId?.category}</td>
               <td className="border px-4 py-2">
                 <img
