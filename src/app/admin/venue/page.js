@@ -45,7 +45,9 @@ const VenueManagement = () => {
   // Fetch all venues from the backend
   const fetchVenues = async () => {
     try {
-      const response = await fetch("https://api.eventlamp.com/api/venues");
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/venues`
+      );
       if (!response.ok) throw new Error("Failed to fetch venues");
       const data = await response.json();
       setVenues(data);
@@ -71,10 +73,13 @@ const VenueManagement = () => {
 
     try {
       // Send files to the backend
-      const response = await fetch("http://localhost/api/v1/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/v1/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to upload images");
 
