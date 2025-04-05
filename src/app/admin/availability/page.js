@@ -10,7 +10,8 @@ import {
   subMonths,
 } from "date-fns";
 
-const API_URL = "http://localhost:5000/api/availability";
+//const API_URL = "http://localhost:5000/api/availability";
+const API_BACKEND_URL = process.env.NEXT_PUBLIC_API_BACKEND_URL;
 
 const Availability = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -33,7 +34,7 @@ const Availability = () => {
       const month = currentMonth.getMonth(); // Get month as 0-11
 
       const response = await fetch(
-        `${API_URL}/67aa679925c4cdeac1d83cb0/${year}/${month}`
+        `${API_BACKEND_URL}/availability/67aa679925c4cdeac1d83cb0/${year}/${month}`
       );
       if (!response.ok) throw new Error("Failed to fetch availability data");
 
@@ -107,7 +108,7 @@ const Availability = () => {
       });
 
       // Send data to the backend
-      const response = await fetch(`${API_URL}/set`, {
+      const response = await fetch(`${API_BACKEND_URL}/set`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
