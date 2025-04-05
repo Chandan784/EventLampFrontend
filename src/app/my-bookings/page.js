@@ -45,6 +45,7 @@ function page() {
               <td className="border px-4 py-2">{booking.venueId?.name}</td>
               <td className="border px-4 py-2">{booking.venueId?.category}</td>
               <td className="border px-4 py-2">{booking.venueId?.category}</td>
+              <td className="border px-4 py-2">{booking.venueId?.category}</td>
               <td className="border px-4 py-2">
                 <img
                   src={booking.venueId?.image}
