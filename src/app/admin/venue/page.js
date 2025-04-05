@@ -136,7 +136,7 @@ const VenueManagement = () => {
       if (isEditing) {
         // Update existing venue
         response = await fetch(
-          `https://api.eventlamp.com/api/venues/${editVenueId}`,
+          `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/venues/${editVenueId}`,
           {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
