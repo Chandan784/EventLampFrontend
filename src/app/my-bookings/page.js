@@ -33,6 +33,7 @@ function page() {
             <th className="border px-4 py-2">Venue Name</th>
             <th className="border px-4 py-2">Venue Category</th>
             <th className="border px-4 py-2">Venue Image</th>
+            <th className="border px-4 py-2">Venue Image</th>
           </tr>
         </thead>
         <tbody>
