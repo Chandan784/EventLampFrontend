@@ -29,7 +29,7 @@ export default function Authentcation() {
     setLoading(true);
 
     //biswa edit .env url
-    const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const API_BACKEND_URL = process.env.NEXT_PUBLIC_API_BACKEND_URL;
 
     // Validation for required fields
     if (!email || !password || (!isLogin && (!fullName || !phoneNumber))) {
@@ -42,7 +42,7 @@ export default function Authentcation() {
       if (isLogin) {
         // Login API Call
         const { data } = await axios.post(
-          `${BACKEND_API_URL}/auth/login`,
+          `${API_BACKEND_URL}/auth/login`,
           { email, password }
         );
 
@@ -61,7 +61,7 @@ export default function Authentcation() {
       } else {
         // Signup API Call (updated to include phoneNumber)
         const { data } = await axios.post(
-          `${BACKEND_API_URL}/auth/register`,
+          `${API_BACKEND_URL}/auth/register`,
           { name: fullName, email, password, phoneNumber } // Include phoneNumber
         );
 
@@ -89,7 +89,7 @@ export default function Authentcation() {
     try {
       // Forgot Password API Call
       const { data } = await axios.post(
-        `${BACKEND_API_URL}/auth/forgot-password`,
+        `${API_BACKEND_URL}/auth/forgot-password`,
         { email }
       );
 
@@ -117,7 +117,7 @@ export default function Authentcation() {
     try {
       // Reset Password API Call
       const { data } = await axios.post(
-        `${BACKEND_API_URL}/auth/reset-password/${resetToken}`,
+        `${API_BACKEND_URL}/auth/reset-password/${resetToken}`,
         { newPassword }
       );
 

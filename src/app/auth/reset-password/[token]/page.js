@@ -45,7 +45,7 @@ export default function ResetPassword({ params }) {
 
       // Reset Password API Call
       const { data } = await axios.post(
-        `${BACKEND_API_URL}/auth/reset-password/${token}`,
+        `${API_BACKEND_URL}/auth/reset-password/${token}`,
         { newPassword }
       );
 
