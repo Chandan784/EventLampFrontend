@@ -4,7 +4,7 @@ const venues = [
     name: "Royal Mandap",
     category: "Mandap",
     image:
-      "https://img.freepik.com/free-photo/navratri-highly-detailed-door-decoration_23-2151193774.jpg?ga=GA1.1.2138913309.1657375850&semt=ais_hybrid",
+      "https://th.bing.com/th/id/OIP.qOnVWVr18PtY9T0aZW2rDgAAAA?w=292&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
     capacity: 500,
     price: 5000,
     location: "Mumbai",

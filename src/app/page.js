@@ -9,7 +9,7 @@ import WeddingVenueCategories from "@/components/layouts/Category";
 import CompactCategoryRow from "@/components/layouts/Category";
 import ResponsiveNavigation from "@/components/layouts/UserSidebar";
 import VenueSlider from "@/components/layouts/Slider";
-
+import offlineData from "../app/data.js";
 export default function Home() {
   const [venues, setVenues] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -36,7 +36,12 @@ export default function Home() {
       try {
         const response = await fetch("https://api.eventlamp.com/api/venues");
         const data = await response.json();
-        setVenues(data);
+
+        if (data) {
+          setVenues(offlineData);
+        } else {
+          setVenues(offlineData);
+        }
       } catch (error) {
         console.error("Error fetching venues:", error);
       }

@@ -145,11 +145,14 @@ const VenueManagement = () => {
         );
       } else {
         // Create new venue
-        response = await fetch("https://api.eventlamp.com/api/venues", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(newVenue),
-        });
+        response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/venues`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newVenue),
+          }
+        );
       }
 
       if (!response.ok) throw new Error("Failed to save venue");
@@ -177,7 +180,7 @@ const VenueManagement = () => {
   const handleDelete = async (venueId) => {
     try {
       const response = await fetch(
-        `https://api.eventlamp.com/api/venues/${venueId}`,
+        `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/venues/${venueId}`,
         {
           method: "DELETE",
         }

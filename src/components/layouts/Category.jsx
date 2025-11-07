@@ -9,6 +9,8 @@ import {
   GiPartyFlags,
 } from "react-icons/gi";
 
+import vanueCategoriesOfflineData from "../../app/venueCategoriesData.js";
+
 // Icon mapping
 const iconMap = {
   GiWoodenDoor: <GiWoodenDoor />,
@@ -28,7 +30,13 @@ const MobileVenueCategories = () => {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/v1/venueCategory`
         );
-        setCategories(res.data);
+        if (res.data.length != 0) {
+          console.log(res.data);
+
+          setCategories(res.data);
+        } else {
+          setCategories(vanueCategoriesOfflineData);
+        }
       } catch (err) {
         console.error("Failed to load categories:", err);
       }
@@ -48,7 +56,8 @@ const MobileVenueCategories = () => {
               className={`w-16 h-16 rounded-full flex items-center justify-center shadow-md ${category.color} transition duration-300`}
             >
               <div className="text-2xl">
-                {iconMap[category.icon] || <GiWoodenDoor />}
+                <img src={category.icon} alt="" />
+                {/* {iconMap[category.icon] || <GiWoodenDoor />} */}
               </div>
             </div>
             <span className="text-sm text-gray-700 mt-2 font-semibold">

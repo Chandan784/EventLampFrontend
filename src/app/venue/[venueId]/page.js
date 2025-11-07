@@ -11,7 +11,7 @@ import {
   addMonths,
   subMonths,
 } from "date-fns";
-
+import data from "../../../app/data.js";
 export default function VenueDetails({ params }) {
   let id = params.venueId; // Get dynamic venue ID from URL
   const router = useRouter();
@@ -27,12 +27,12 @@ export default function VenueDetails({ params }) {
     const fetchVenue = async () => {
       try {
         // Fetch venue details using the dynamic `id`
-        const res = await fetch(`https://api.eventlamp.com/api/venues/${id}`);
-        if (!res.ok) {
-          throw new Error(`Failed to fetch venue: ${res.statusText}`);
-        }
-        const data = await res.json();
-        console.log(data);
+        // const res = await fetch(`https://api.eventlamp.com/api/venues/${id}`);
+        // if (!res.ok) {
+        //   throw new Error(`Failed to fetch venue: ${res.statusText}`);
+        // }
+        // const data = await res.json();
+        // console.log(data);
 
         setVenue(data);
 
@@ -123,7 +123,7 @@ export default function VenueDetails({ params }) {
       {/* Venue Image Section */}
       <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-lg">
         <img
-          src={venue.images?.[0] || "/fallback.jpg"}
+          src={venue.image}
           alt={venue.name}
           className="w-full h-full object-cover"
         />

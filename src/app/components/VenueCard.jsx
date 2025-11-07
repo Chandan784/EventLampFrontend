@@ -7,6 +7,7 @@ const VenueCard = ({ venue }) => {
     _id,
     name,
     images,
+    image,
     capacity,
     price,
     location,
@@ -46,7 +47,7 @@ const VenueCard = ({ venue }) => {
       onClick={handleCardClick}
     >
       {/* Venue Image */}
-      <img src={images[0]} alt={name} className="w-full h-48 object-cover" />
+      <img src={image} alt={name} className="w-full h-48 object-cover" />
 
       {/* Venue Details */}
       <div className="p-4">

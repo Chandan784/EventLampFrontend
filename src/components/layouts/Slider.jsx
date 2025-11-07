@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import sliderOfflineData from "../../app/sliderOfflineData.js";
 const VenueSlider = () => {
   const [venues, setVenues] = useState([]);
 
@@ -26,7 +26,11 @@ const VenueSlider = () => {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/v1/slider`
         );
-        setVenues(response.data);
+        if (response.data != 0) {
+          setVenues(response.data);
+        } else {
+          setVenues(sliderOfflineData);
+        }
       } catch (error) {
         console.error("Failed to fetch slider data:", error);
       }
