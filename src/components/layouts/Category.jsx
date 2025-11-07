@@ -33,7 +33,7 @@ const MobileVenueCategories = () => {
         if (res.data.length != 0) {
           console.log(res.data);
 
-          setCategories(res.data);
+          setCategories(vanueCategoriesOfflineData);
         } else {
           setCategories(vanueCategoriesOfflineData);
         }

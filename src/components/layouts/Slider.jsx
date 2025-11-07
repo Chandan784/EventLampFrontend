@@ -27,7 +27,7 @@ const VenueSlider = () => {
           `${process.env.NEXT_PUBLIC_API_BACKEND_URL}/api/v1/slider`
         );
         if (response.data != 0) {
-          setVenues(response.data);
+          setVenues(sliderOfflineData);
         } else {
           setVenues(sliderOfflineData);
         }
